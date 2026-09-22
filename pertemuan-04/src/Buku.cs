@@ -10,12 +10,17 @@ public class Buku
     // TODO(Level 1): field PUBLIK di bawah ini melanggar enkapsulasi (siapa pun
     //   bisa mengubahnya sembarangan). Jadikan field PRIVATE (awali nama dengan
     //   _) lalu ekspos lewat properti read-only: public get, tanpa setter
-    //   publik. Nama properti tetap Isbn, Judul, StokTotal, StokTersedia.
-    public string Isbn = "";
-    public string Judul = "";
-    public int StokTotal;
-    public int StokTersedia;
+    //   publik. public string Isbn => _isbn;
+    private string _isbn = "";
+    private string _judul = "";
+    private int _stokTotal;
+    private int _stokTersedia;
 
+    public string Isbn => _isbn;
+    public string Judul => _judul;
+    public int StokTotal => _stokTotal;
+    public int StokTersedia => _stokTersedia;
+    
     // TODO(Level 8): properti di bawah ini menerima nilai apa saja. Beri nilai
     //   awal 7 dan tambahkan logika validasi di accessor set (perlu field
     //   pendukung): nilai harus 1..30, di luar itu lempar
@@ -33,7 +38,10 @@ public class Buku
     {
         // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
         //   awal = stokTotal.
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+         _isbn = isbn;
+        _judul = judul;
+        _stokTotal = stokTotal;
+        _stokTersedia = stokTotal;
     }
 
     public void Pinjam()

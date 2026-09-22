@@ -38,6 +38,16 @@ public class Buku
     {
         // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
         //   awal = stokTotal.
+        if (string.IsNullOrWhiteSpace(judul))
+        {
+            throw new ArgumentException("Judul tidak boleh null, kosong, atau hanya spasi.");
+        }
+
+        if (stokTotal < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(stokTotal), "Stok total tidak boleh negatif.");
+        }
+
          _isbn = isbn;
         _judul = judul;
         _stokTotal = stokTotal;

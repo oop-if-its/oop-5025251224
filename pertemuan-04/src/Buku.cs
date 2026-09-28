@@ -76,24 +76,32 @@ public class Buku
     }
 
     // Level 5: properti TERHITUNG -- tanpa field pendukung, tanpa setter.
-    public double PersentaseTersedia
+   public double PersentaseTersedia
+{
+    get
     {
-        get
+        // TODO(Level 5): kembalikan StokTersedia / StokTotal * 100 (double).
+        //   Kalau StokTotal = 0 kembalikan 0 (bukan NaN).
+        if (_stokTotal == 0)
         {
-            // TODO(Level 5): kembalikan StokTersedia / StokTotal * 100 (double).
-            //   Kalau StokTotal = 0 kembalikan 0 (bukan NaN).
-            throw new NotImplementedException("Level 5 belum diimplementasikan");
+            return 0;
         }
-    }
 
-    public string Status
+        return (double)_stokTersedia / _stokTotal * 100;
+    }
+}
+
+public string Status
+{
+    get
     {
-        get
+        // TODO(Level 5): kembalikan "Tersedia" kalau StokTersedia > 0,
+        //   selain itu "Habis".
+        if (_stokTersedia > 0)
         {
-            // TODO(Level 5): kembalikan "Tersedia" kalau StokTersedia > 0,
-            //   selain itu "Habis".
-            throw new NotImplementedException("Level 5 belum diimplementasikan");
+            return "Tersedia";
         }
-    }
 
+        return "Habis";
+    }
 }

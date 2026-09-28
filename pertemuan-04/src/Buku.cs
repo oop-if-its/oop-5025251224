@@ -10,7 +10,7 @@ public class Buku
     // TODO(Level 1): field PUBLIK di bawah ini melanggar enkapsulasi (siapa pun
     //   bisa mengubahnya sembarangan). Jadikan field PRIVATE (awali nama dengan
     //   _) lalu ekspos lewat properti read-only: public get, tanpa setter
-    //   publik. public string Isbn => _isbn;
+    //   publik. Nama properti tetap Isbn, Judul, StokTotal, StokTersedia.
     private string _isbn = "";
     private string _judul = "";
     private int _stokTotal;
@@ -20,7 +20,7 @@ public class Buku
     public string Judul => _judul;
     public int StokTotal => _stokTotal;
     public int StokTersedia => _stokTersedia;
-    
+
     // TODO(Level 8): properti di bawah ini menerima nilai apa saja. Beri nilai
     //   awal 7 dan tambahkan logika validasi di accessor set (perlu field
     //   pendukung): nilai harus 1..30, di luar itu lempar
@@ -36,8 +36,7 @@ public class Buku
     //   kalau tidak, lempar ArgumentException. Isbn menyimpan versi TANPA '-'.
     public Buku(string isbn, string judul, int stokTotal)
     {
-        // TODO(Level 1): isi Isbn, Judul, StokTotal dari parameter; StokTersedia
-        //   awal = stokTotal.
+        // Level 2: validasi judul dan stok
         if (string.IsNullOrWhiteSpace(judul))
         {
             throw new ArgumentException("Judul tidak boleh null, kosong, atau hanya spasi.");
@@ -48,7 +47,40 @@ public class Buku
             throw new ArgumentOutOfRangeException(nameof(stokTotal), "Stok total tidak boleh negatif.");
         }
 
-         _isbn = isbn;
+        // Level 6: validasi & normalisasi ISBN
+        if (isbn == null)
+        {
+            throw new ArgumentException("ISBN tidak boleh null.");
+        }
+
+        string bersih = isbn.Replace("-", "").Replace(" ", "");
+
+        if (bersih.Length != 13)
+        {
+            throw new ArgumentException("ISBN harus tepat 13 digit.");
+        }
+
+        int total = 0;
+        for (int i = 0; i < bersih.Length; i++)
+        {
+            char c = bersih[i];
+
+            if (c < '0' || c > '9')
+            {
+                throw new ArgumentException("ISBN hanya boleh berisi angka.");
+            }
+
+            int bobot = (i % 2 == 0) ? 1 : 3;
+            total += (c - '0') * bobot;
+        }
+
+        if (total % 10 != 0)
+        {
+            throw new ArgumentException("Digit cek ISBN tidak valid.");
+        }
+
+        // Level 1: assignment, hanya tercapai kalau semua validasi lolos
+        _isbn = bersih;
         _judul = judul;
         _stokTotal = stokTotal;
         _stokTersedia = stokTotal;
@@ -58,9 +90,11 @@ public class Buku
     {
         // TODO(Level 3): kurangi StokTersedia satu. Kalau stok sudah 0, lempar
         //   InvalidOperationException dan biarkan stok tetap.
-      if (_stokTersedia == 0){
-        throw new NotImplementedException("Stok habis, buku tidak bisa dipinjam.");
-      }
+        if (_stokTersedia == 0)
+        {
+            throw new InvalidOperationException("Stok habis, buku tidak bisa dipinjam.");
+        }
+
         _stokTersedia--;
     }
 
@@ -69,39 +103,42 @@ public class Buku
         // TODO(Level 4): tambah StokTersedia satu. Kalau stok sudah sama dengan
         //   StokTotal (tidak ada yang sedang dipinjam), lempar
         //   InvalidOperationException dan biarkan stok tetap.
-        if (_stokTersedia == _stokTotal){
-        throw new NotImplementedException("Level 4 belum diimplementasikan");
+        if (_stokTersedia == _stokTotal)
+        {
+            throw new InvalidOperationException("Semua eksemplar sudah ada di perpustakaan, tidak ada yang bisa dikembalikan.");
         }
+
         _stokTersedia++;
     }
 
     // Level 5: properti TERHITUNG -- tanpa field pendukung, tanpa setter.
-   public double PersentaseTersedia
-{
-    get
+    public double PersentaseTersedia
     {
-        // TODO(Level 5): kembalikan StokTersedia / StokTotal * 100 (double).
-        //   Kalau StokTotal = 0 kembalikan 0 (bukan NaN).
-        if (_stokTotal == 0)
+        get
         {
-            return 0;
-        }
+            // TODO(Level 5): kembalikan StokTersedia / StokTotal * 100 (double).
+            //   Kalau StokTotal = 0 kembalikan 0 (bukan NaN).
+            if (_stokTotal == 0)
+            {
+                return 0;
+            }
 
-        return (double)_stokTersedia / _stokTotal * 100;
+            return (double)_stokTersedia / _stokTotal * 100;
+        }
     }
-}
 
-public string Status
-{
-    get
+    public string Status
     {
-        // TODO(Level 5): kembalikan "Tersedia" kalau StokTersedia > 0,
-        //   selain itu "Habis".
-        if (_stokTersedia > 0)
+        get
         {
-            return "Tersedia";
-        }
+            // TODO(Level 5): kembalikan "Tersedia" kalau StokTersedia > 0,
+            //   selain itu "Habis".
+            if (_stokTersedia > 0)
+            {
+                return "Tersedia";
+            }
 
-        return "Habis";
+            return "Habis";
+        }
     }
 }

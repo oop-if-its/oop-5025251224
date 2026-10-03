@@ -17,10 +17,14 @@ public class Mahasiswa : Anggota
     public Mahasiswa(string id, string nama, Alamat alamat, string nrp, string prodi)
         : base(id, nama, alamat)
     {
-        // TODO(Level 3): nrp/prodi null/kosong/spasi -> ArgumentException;
-        //   selain itu isi Nrp dan Prodi. (Konstruktor kelas induk sudah
-        //   dipanggil lewat `: base(...)` di atas.)
-        throw new NotImplementedException("Level 3 belum diimplementasikan");
+        if (string.IsNullOrWhiteSpace(nrp))
+            throw new ArgumentException("Nrp tidak boleh null, kosong, atau spasi.", nameof(nrp));
+
+        if (string.IsNullOrWhiteSpace(prodi))
+            throw new ArgumentException("Prodi tidak boleh null, kosong, atau spasi.", nameof(prodi));
+
+        Nrp = nrp;
+        Prodi = prodi;
     }
 
     public string InfoLengkap()

@@ -18,6 +18,7 @@ public class Dosen : Anggota
             throw new ArgumentException("Nip tidak boleh null, kosong, atau spasi.", nameof(nip));
 
         Nip = nip;
+        BatasPinjam = 10;
     }
 
     public string InfoLengkap()

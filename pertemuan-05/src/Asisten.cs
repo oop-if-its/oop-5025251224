@@ -11,3 +11,25 @@ namespace Pertemuan05;
 //   teruskan lima parameter pertama ke konstruktor Mahasiswa lewat `:
 //   base(...)`. Properti get-only `MataKuliah`. BatasPinjam = 5. Method
 //   `InfoAsisten()` mengembalikan "<InfoLengkap()> | Asisten: <MataKuliah>".
+public sealed class Asisten : Mahasiswa
+{
+    public string MataKuliah { get; }
+
+    public Asisten(string id, string nama, Alamat alamat, string nrp, string prodi, string mataKuliah)
+        : base(id, nama, alamat, nrp, prodi)
+    {
+        if (string.IsNullOrWhiteSpace(mataKuliah))
+            throw new ArgumentException("MataKuliah tidak boleh null, kosong, atau spasi.", nameof(mataKuliah));
+
+        MataKuliah = mataKuliah;
+        BatasPinjam = 5;
+    }
+
+    public string InfoAsisten()
+    {
+        // Versi sementara: memuat "Id - Nama", Nrp, dan MataKuliah.
+        // Setelah Level 7 selesai, ganti isinya menjadi:
+        //   return $"{InfoLengkap()} | Asisten: {MataKuliah}";
+        return $"{Info()} | NRP: {Nrp} | Asisten: {MataKuliah}";
+    }
+}

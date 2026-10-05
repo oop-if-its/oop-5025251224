@@ -59,9 +59,12 @@ public class Anggota
     //   `_log.Catat($"Pinjam: {judul}")`.
     public void Pinjam(string judul)
     {
-        // TODO(Level 5): judul null/kosong -> ArgumentException; JumlahPinjam
-        //   sudah mencapai BatasPinjam -> InvalidOperationException; selain itu
-        //   naikkan JumlahPinjam satu.
-        throw new NotImplementedException("Level 5 belum diimplementasikan");
+        if (string.IsNullOrWhiteSpace(judul))
+            throw new ArgumentException("Judul tidak boleh null, kosong, atau spasi.", nameof(judul));
+
+        if (JumlahPinjam >= BatasPinjam)
+            throw new InvalidOperationException("Batas peminjaman sudah tercapai.");
+
+        JumlahPinjam++;
     }
 }

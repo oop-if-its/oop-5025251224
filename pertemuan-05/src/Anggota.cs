@@ -19,18 +19,15 @@ public class Anggota
 
     public int JumlahPinjam { get; private set; }
 
-    // TODO(Level 9): tambahkan field `private readonly LogAktivitas _log =
-    //   new();` -- setiap Anggota MEMILIKI log-nya sendiri (bukan satu log
-    //   bersama/static).
+    // Level 9: setiap Anggota MEMILIKI log-nya sendiri (bukan static).
+    private readonly LogAktivitas _log = new();
 
     // Level 9: riwayat aktivitas milik anggota ini.
     public IReadOnlyList<string> Riwayat
     {
         get
         {
-            // TODO(Level 9): kembalikan isi log milik anggota ini
-            //   (LogAktivitas.Semua).
-            throw new NotImplementedException("Level 9 belum diimplementasikan");
+            return _log.Semua;
         }
     }
 
@@ -55,8 +52,6 @@ public class Anggota
         return $"{Id} - {Nama}";
     }
 
-    // TODO(Level 9): setiap peminjaman yang berhasil juga dicatat ke log:
-    //   `_log.Catat($"Pinjam: {judul}")`.
     public void Pinjam(string judul)
     {
         if (string.IsNullOrWhiteSpace(judul))
@@ -66,5 +61,6 @@ public class Anggota
             throw new InvalidOperationException("Batas peminjaman sudah tercapai.");
 
         JumlahPinjam++;
+        _log.Catat($"Pinjam: {judul}"); // Level 9: hanya peminjaman yang berhasil dicatat
     }
 }

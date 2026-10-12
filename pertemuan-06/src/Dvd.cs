@@ -33,4 +33,8 @@ public class Dvd : Item
 
     // TODO(Level 5): override Deskripsi() -> "<base.Deskripsi()> (<DurasiMenit>
     //   menit)", mis. "[Laskar Pelangi] (125 menit)".
+    public override string Deskripsi()
+{
+    return $"{base.Deskripsi()} ({DurasiMenit} menit)";
+}
 }

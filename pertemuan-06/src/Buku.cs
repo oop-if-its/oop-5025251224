@@ -29,6 +29,7 @@ public class Buku : Item
 }
 
     // TODO(Level 4): override properti MasaPinjamHari -> 14.
+    public override int MasaPinjamHari => 14;
 
     // TODO(Level 5): override Deskripsi() -> "<base.Deskripsi()> oleh
     //   <Penulis>", mis. "[Bumi Manusia] oleh Pramoedya".

@@ -26,7 +26,10 @@ public class Item
     {
         // TODO(Level 1): denda umum = Rp1.000 per hari terlambat. hariTerlambat
         //   <= 0 -> 0.
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+        if (hariTerlambat <= 0)
+        return 0;
+
+    return hariTerlambat * 1000;
     }
 
     // TODO(Level 4): jadikan properti ini `virtual`, lalu override di Buku (14),

@@ -33,4 +33,8 @@ public class Buku : Item
 
     // TODO(Level 5): override Deskripsi() -> "<base.Deskripsi()> oleh
     //   <Penulis>", mis. "[Bumi Manusia] oleh Pramoedya".
+    public override string Deskripsi()
+{
+    return $"{base.Deskripsi()} oleh {Penulis}";
+}
 }

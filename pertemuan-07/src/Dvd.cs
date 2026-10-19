@@ -6,9 +6,11 @@
 namespace Pertemuan07;
 
 // TODO(Level 3): implementasikan IDapatDipinjam.
-public class Dvd : Item
+public class Dvd : Item, IDapatDipinjam
 {
     public int DurasiMenit { get; }
+
+     private readonly StatusPinjam _status = new();
 
     // SUDAH LENGKAP -- jangan diubah.
     public Dvd(string judul, int durasiMenit) : base(judul)
@@ -30,6 +32,11 @@ public class Dvd : Item
     public override int MasaPinjamHari => 2;
 
     // TODO(Level 3): implementasi IDapatDipinjam (lihat petunjuk di Buku).
+    public bool Tersedia => !_status.Dipinjam;
+
+    public void Pinjam() => _status.Tandai();
+
+    public void Kembalikan() => _status.Lepas();
 
     // TODO(Level 10 (bonus)): override hook `protected override string
     //   Catatan()` -> "Periksa kondisi disk".

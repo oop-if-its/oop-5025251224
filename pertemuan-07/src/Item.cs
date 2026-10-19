@@ -9,7 +9,7 @@ namespace Pertemuan07;
 //   "item umum" yang bisa dibuat langsung.
 // TODO(Level 9): buat Item mengimplementasikan IComparable<Item> (urut
 //   berdasarkan Judul).
-public class Item
+public abstract class Item
 {
     public string Judul { get; }
 
@@ -24,7 +24,7 @@ public class Item
     // TODO(Level 1): jadikan `abstract` (tanpa badan, titik koma saja) -- setiap
     //   jenis item wajib menentukan dendanya sendiri. Di kelas turunan tulis
     //   `public override int HitungDenda(int hariTerlambat)`.
-    public virtual int HitungDenda(int hariTerlambat) => throw new NotImplementedException("Level 1 belum diimplementasikan");
+    public abstract int HitungDenda(int hariTerlambat);
 
     // TODO(Level 2): jadikan `abstract` (properti tanpa badan: `public abstract
     //   int MasaPinjamHari { get; }`); override di Buku (14), Majalah (3), Dvd

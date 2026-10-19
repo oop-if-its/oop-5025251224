@@ -53,7 +53,15 @@ public abstract class Item: IComparable<Item>
         //   "Denda: Rp<HitungDenda(hari)>" (angka polos tanpa pemisah ribuan).
         //   Kalau Catatan() TIDAK kosong, tambahkan baris 5 "Catatan:
         //   <Catatan()>".
-        throw new NotImplementedException("Level 10 belum diimplementasikan");
+       int hari = hariTerlambat < 0 ? 0 : hariTerlambat;
+
+        string struk = $"STRUK PENGEMBALIAN\nJudul: {Judul}\nTerlambat: {hari} hari\nDenda: Rp{HitungDenda(hari)}";
+
+        string catatan = Catatan();
+        if (!string.IsNullOrEmpty(catatan))
+            struk += $"\nCatatan: {catatan}";
+
+        return struk;
     }
 
     public int CompareTo(Item? other)

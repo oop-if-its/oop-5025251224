@@ -59,7 +59,8 @@ public class LayananPeminjaman
     {
         // TODO(Level 6): notifikasi null -> ArgumentNullException; selain itu
         //   simpan ke field private readonly `_notifikasi`.
-        throw new NotImplementedException("Level 6 belum diimplementasikan");
+        ArgumentNullException.ThrowIfNull(notifikasi);
+        _notifikasi = notifikasi;
     }
 
     public void Pinjamkan(Item item, string namaAnggota)
@@ -69,6 +70,14 @@ public class LayananPeminjaman
         //   Pinjam() (kalau melempar, biarkan menjalar dan JANGAN kirim
         //   notifikasi), lalu kirim pesan "<namaAnggota> meminjam <Judul>" lewat
         //   INotifikasi.
-        throw new NotImplementedException("Level 6 belum diimplementasikan");
+       ArgumentNullException.ThrowIfNull(item);
+
+        if (item is not IDapatDipinjam bisaDipinjam)
+            throw new InvalidOperationException($"{item.Judul} tidak dapat dipinjam.");
+
+        // Kalau Pinjam() melempar, exception menjalar dan notifikasi TIDAK terkirim.
+        bisaDipinjam.Pinjam();
+
+        _notifikasi.Kirim($"{namaAnggota} meminjam {item.Judul}");
     }
 }

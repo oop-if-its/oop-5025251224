@@ -32,6 +32,7 @@ public class Buku : Item
     }
 
     // TODO(Level 2): tulis `public override int MasaPinjamHari` -> 14.
+    public override int MasaPinjamHari => 14;
 
     // TODO(Level 3): implementasi IDapatDipinjam. Saran: simpan `private
     //   readonly StatusPinjam _status = new();` lalu Tersedia =

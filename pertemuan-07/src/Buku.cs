@@ -25,6 +25,12 @@ public class Buku : Item
     // TODO(Level 1): tulis `public override int HitungDenda(int hariTerlambat)`
     //   -- Rp2.000 per hari terlambat (hariTerlambat <= 0 -> 0).
 
+    public override int HitungDenda(int hariTerlambat)
+    {
+        if (hariTerlambat <= 0) return 0;
+        return hariTerlambat * 2000;
+    }
+
     // TODO(Level 2): tulis `public override int MasaPinjamHari` -> 14.
 
     // TODO(Level 3): implementasi IDapatDipinjam. Saran: simpan `private

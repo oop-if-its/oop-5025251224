@@ -10,9 +10,11 @@ namespace Pertemuan07;
 //   diperpanjang).
 // TODO(Level 8): implementasikan IDapatDicetak (implementasi biasa / implisit --
 //   method Cetak() bersifat public).
-public class Buku : Item
+public class Buku : Item, IDapatDipinjam
 {
     public string Penulis { get; }
+    private readonly StatusPinjam _status = new();
+    
 
     // SUDAH LENGKAP -- jangan diubah.
     public Buku(string judul, string penulis) : base(judul)
@@ -38,8 +40,13 @@ public class Buku : Item
     //   readonly StatusPinjam _status = new();` lalu Tersedia =
     //   !_status.Dipinjam; Pinjam() -> _status.Tandai(); Kembalikan() ->
     //   _status.Lepas() dan JANGAN lupa reset JumlahPerpanjangan menjadi 0
+    public bool Tersedia => !_status.Dipinjam;
+
+    public void Pinjam() => _status.Tandai();
+    
     //   (Level 4). Pinjam dua kali / Kembalikan saat tidak dipinjam ->
     //   InvalidOperationException (sudah ditangani StatusPinjam).
+    public void Kembalikan() => _status.Lepas();
 
     // TODO(Level 4): implementasi IDapatDiperpanjang. JumlahPerpanjangan (get
     //   publik, set private) mulai 0. Perpanjang(): kalau buku TIDAK sedang

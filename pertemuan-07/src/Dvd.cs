@@ -40,4 +40,5 @@ public class Dvd : Item, IDapatDipinjam
 
     // TODO(Level 10 (bonus)): override hook `protected override string
     //   Catatan()` -> "Periksa kondisi disk".
+    protected override string Catatan() => "Periksa kondisi disk";
 }

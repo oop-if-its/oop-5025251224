@@ -37,21 +37,21 @@ public class Peminjaman
     //   tanggal = hari ini (`DateOnly.FromDateTime(DateTime.Today)`). Jangan
     //   menyalin ulang validasi/pengisian.
     public Peminjaman(string judul, string anggota, int lamaHari)
+         : this(judul, anggota, lamaHari, DateOnly.FromDateTime(DateTime.Today))
     {
-        : this(judul, anggota, lamaHari, DateOnly.FromDateTime(DateTime.Today))
     }
 
     // TODO(Level 1): teruskan ke konstruktor 3-parameter di atas dengan lamaHari
     //   = 7.
     public Peminjaman(string judul, string anggota)
+         : this(judul, anggota, 7)
     {
-       : this(judul, anggota, 7)
     }
 
     // TODO(Level 1): teruskan ke konstruktor 2-parameter dengan anggota =
     //   "Umum".
     public Peminjaman(string judul)
+         : this(judul, "Umum")
     {
-        : this(judul, "Umum")
     }
 }

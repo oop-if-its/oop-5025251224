@@ -38,20 +38,20 @@ public class Peminjaman
     //   menyalin ulang validasi/pengisian.
     public Peminjaman(string judul, string anggota, int lamaHari)
     {
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+        : this(judul, anggota, lamaHari, DateOnly.FromDateTime(DateTime.Today))
     }
 
     // TODO(Level 1): teruskan ke konstruktor 3-parameter di atas dengan lamaHari
     //   = 7.
     public Peminjaman(string judul, string anggota)
     {
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+       : this(judul, anggota, 7)
     }
 
     // TODO(Level 1): teruskan ke konstruktor 2-parameter dengan anggota =
     //   "Umum".
     public Peminjaman(string judul)
     {
-        throw new NotImplementedException("Level 1 belum diimplementasikan");
+        : this(judul, "Umum")
     }
 }

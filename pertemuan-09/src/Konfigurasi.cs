@@ -20,4 +20,10 @@ public static class Konfigurasi
     //   static constructor.) Test memastikan JumlahInisialisasi bernilai TEPAT 1
     //   walau anggota kelas ini diakses berkali-kali.
     // (static constructor belum ditulis)
+    static Konfigurasi()
+    {
+        JumlahInisialisasi++;
+        DendaPerHari = 1000;
+        MaksPinjam = 3;
+    }
 }

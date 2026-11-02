@@ -7,7 +7,7 @@ namespace Pertemuan08;
 
 // Sumber daya yang harus DITUTUP: setiap Koneksi yang dibuka wajib di-Dispose.
 // TODO(Level 8): buat Koneksi mengimplementasikan IDisposable (`: IDisposable`).
-public class Koneksi
+public class Koneksi : IDisposable
 {
     private static int _jumlahTerbuka;
 

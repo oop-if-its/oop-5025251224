@@ -14,17 +14,17 @@ public class BukuTidakTersediaException : Exception
     // TODO(Level 4): konstruktor (string judul) -> pesan "Buku '<judul>' tidak
     //   tersedia." lewat `: base(...)`, dan simpan judul ke properti Judul.
     public BukuTidakTersediaException(string judul)
-        : base("")
+        : base($"Buku '{judul}' tidak tersedia.")
     {
-        throw new NotImplementedException("Level 4 belum diimplementasikan");
+       Judul = judul;
     }
 
     // TODO(Level 4): konstruktor (string judul, Exception inner) -> pesan sama,
     //   tetapi menyertakan exception penyebab lewat `: base(pesan, inner)`.
     public BukuTidakTersediaException(string judul, Exception inner)
-        : base("", inner)
+        : base($"Buku '{judul}' tidak tersedia.", inner)
     {
-        throw new NotImplementedException("Level 4 belum diimplementasikan");
+        Judul = judul;
     }
 }
 
